@@ -45,14 +45,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RestException.class)
     public ResponseEntity<ApiError> handleIllegalArgument(RestException ex, Locale locale) {
         String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
-        return new ResponseEntity<>(new ApiError(BAD_REQUEST, errorMessage, ex), BAD_REQUEST);
+        return new ResponseEntity<>(new ApiError(ex.getCode(), BAD_REQUEST, errorMessage, ex), BAD_REQUEST);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiError> handleEntityNotFound(
             EntityNotFoundException ex, Locale locale) {
         String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
-        return new ResponseEntity<>(new ApiError(BAD_REQUEST, errorMessage, ex), BAD_REQUEST);
+        return new ResponseEntity<>(new ApiError(ex.getCode(), BAD_REQUEST, errorMessage, ex), BAD_REQUEST);
     }
 
     @ExceptionHandler(javax.validation.ConstraintViolationException.class)

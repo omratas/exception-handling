@@ -1,16 +1,21 @@
 package com.exceptionhandling.exceptionhandling.exceptions;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-public class EntityNotFoundException extends RuntimeException {
+public class EntityNotFoundException extends ExpectedError {
 
     private static final long serialVersionUID = 5467273153552791064L;
 
-    private String message;
     private Object[] args;
 
 
+    public EntityNotFoundException(String code, String message) {
+        super(code, message);
+    }
+
+    public EntityNotFoundException(String code, String message, Object[] args) {
+        super(code, message);
+        this.args = args;
+    }
 }
